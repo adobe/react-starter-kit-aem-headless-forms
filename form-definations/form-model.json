@@ -1,0 +1,215 @@
+{
+  "afModelDefinition": {
+    "adaptiveform": "0.10.0",
+    "items": [
+      {
+        "name": "wizard",
+        "label": {
+          "value": "Welcome"
+        },
+        "fieldType" : "panel",
+        ":type": "custom:vertical-tab",
+        "items": [
+          {
+            "name": "step1",
+            "fieldType" : "panel",
+            "label": {
+              "value": "Identify Yourself",
+              "visible": false
+            },
+            "items": [
+              {
+                "fieldType": "plain-text",
+                "richText" : true,
+                "value": "Welcome to <b>Personal Banking</b>"
+              },
+              {
+                "name": "mobileNumber",
+                "fieldType": "text-input",
+                "type": "string",
+                "required": true,
+                "description": "You do not need to add +91 - Share your 10 digit mobile number.\n We will be sending you an OTP to this number have it handy.",
+                "label": {
+                  "value": "Please share your registered mobile number"
+                }
+              },
+              {
+                "name": "creditCardEndingNumber",
+                "fieldType": "text-input",
+                "type": "string",
+                "required": true,
+                "description": "We will need your credit card number to check your eligibility",
+                "label": {
+                  "value": "Share last 4 digits of your credit card number"
+                }
+              },
+              {
+                "name": "viewEligibilityButton",
+                "fieldType": "button",
+                "label": {
+                  "value": "View Loan Eligibility"
+                }
+              }
+            ]
+          },
+          {
+            "name": "loanDetails",
+            "fieldType": "panel",
+            "type": "object",
+            "label": {
+              "value": "Loan Details"
+            },
+            "items": [
+              {
+                ":type": "custom:slider",
+                "name": "amount",
+                "fieldType": "number-input",
+                "required": true,
+                "default": 600000,
+                "maximum": 1000000,
+                "minimum" : 10000,
+                "step" : 1000,
+                "constraintMessages": {
+                  "minimum": "Loan amount cannot be less than minimum",
+                  "maximum": "Loan amount cannot exceed the maximum limit"
+                },
+                "description": "It doesn't block your credit limit",
+                "label": {
+                  "value": "Choose Loan Amount"
+                }
+              },
+              {
+                ":type": "custom:slider",
+                "name": "duration",
+                "fieldType": "number-input",
+                "required": true,
+                "default": 12,
+                "maximum": 60,
+                "minimum" : 2,
+                "description": "Longer duration = Lower EMI",
+                "label": {
+                  "value": "Choose Loan Duration in Months"
+                }
+              },
+              {
+                ":type": "custom:slider",
+                "name": "rateOfInterest",
+                "default": 8,
+                "maximum": 12,
+                "minimum" : 6,
+                "fieldType": "number-input",
+                "type": "number",
+                "label": {
+                  "value": "Rate of Interest"
+                },
+                "rules": {
+                  "value": "8"
+                }
+              },
+              {
+                "name": "emi",
+                "fieldType": "plain-text",
+                "value": "Monthly EMI"
+              },
+              {
+                "name": "emi",
+                "fieldType": "plain-text",
+                "rules": {
+                  "value": "toString( amount.$value * rateOfInterest.$value / 1200 * power(1 + rateOfInterest.$value / 1200, duration.$value) / (power(1 + rateOfInterest.$value / 1200, duration.$value) - 1))"
+                }
+              },
+              {
+                "name": "addAccountDetails",
+                "fieldType": "button",
+                "label": {
+                  "value": "Add Account Details"
+                }
+              }
+            ]
+          },
+          {
+            "name": "acountDetails",
+            "fieldType": "panel",
+            "type": "object",
+            "label": {
+              "value": "Account Details"
+            },
+            "items": [
+              {
+                "name": "bankName",
+                "fieldType": "drop-down",
+                "required": true,
+                "label": {
+                  "value": "Please provide Name of your Bank"
+                },
+                "enum": [
+                  "HDFC Bank",
+                  "ICICI",
+                  "Kotak"
+                ]
+              },
+              {
+                "name": "acountNumber",
+                "fieldType": "text-input",
+                "type": "string",
+                "required": true,
+                "label": {
+                  "value": "Next, Your Acount Number"
+                },
+                "pattern": "[0-9]{10,10}",
+                "constraintMessages": {
+                  "pattern": "Account number must be 10 digits long.",
+                  "required": "Account number cannot be empty."
+                }
+              },
+              {
+                "name": "acountNumberReEnter",
+                "fieldType": "text-input",
+                "type": "string",
+                "required": true,
+                "label": {
+                  "value": "Kindely re-enter Your Acount Number"
+                },
+                "validationExpression" : "$field == acountNumber",
+                "pattern": "[0-9]{10,10}",
+                "constraintMessages": {
+                  "pattern": "Account number must be 10 digits long.",
+                  "required": "Account number cannot be empty."
+                }
+              },
+              {
+                "name": "ifscCode",
+                "fieldType": "text-input",
+                "type": "string",
+                "required": true,
+                "label": {
+                  "value": "We will now need Your Bank's IFSC"
+                },
+                "description": "You can find it on Your cheque Book"
+              },
+              {
+                "name": "loanOtpConfirmButton",
+                "fieldType": "button",
+                "label": {
+                  "value": "Submit"
+                },
+                "events": {
+                  "click": "if(length(validate()) == 0, submitForm(),{})"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "description": "Sample loan form",
+    "title": "Loan Form",
+    "metadata": {
+      "grammar": "json-formula-1.0.0",
+      "version": "1.0.0",
+      "tags": [
+        "loan"
+      ]
+    }
+  }
+}
