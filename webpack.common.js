@@ -35,8 +35,12 @@ module.exports = {
             process: {
                 browser: true,
                 env: {
-                    FORM_API: `'${process.env.FORM_API}'`,
-                    USE_LOCAL_JSON: `'${process.env.USE_LOCAL_JSON}'`
+                    USE_LOCAL_JSON: `'${process.env.USE_LOCAL_JSON}'`,
+                    AEM_FORM_PATH: `'${process.env.AEM_FORM_PATH}'`,
+                    AEM_USERNAME: `'${process.env.AEM_USERNAME}'`,
+                    AEM_PASSWORD: `'${process.env.AEM_PASSWORD}'`,
+                    AEM_URL: `'${process.env.AEM_URL}'`,
+                    FORM_API: `'${process.env.FORM_API}'`
                 }
             }
         }),

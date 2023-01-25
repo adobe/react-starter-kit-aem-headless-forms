@@ -22,7 +22,14 @@ const getForm = async () => {
   if (process.env.USE_LOCAL_JSON == 'true') {
     return localFormJson;
   } else {
-    const resp = await fetch('/api');
+    let formAPI = process.env.FORM_API;
+    // check for null or empty string
+    if (!formAPI) {
+        const SUFFIX = "jcr:content/guideContainer.model.json";
+        const formPath = process.env.AEM_FORM_PATH
+        formAPI = `${formPath}/${SUFFIX}`;
+    }
+    const resp = await fetch(formAPI);
     return (await resp.json());
   }
 }
@@ -31,7 +38,11 @@ const Form = (props: any) => {
     const [form, setForm] = useState("")
     const fetchForm = async () => {
         const json:any = await getForm();
-        setForm(JSON.stringify(json.afModelDefinition))
+        if ('afModelDefinition' in json) {
+            setForm(JSON.stringify(json.afModelDefinition))
+        } else {
+            setForm(JSON.stringify(json))
+        }
     }
     const onSubmit= (action: Action) => {
       console.log('Submitting ' + action);
