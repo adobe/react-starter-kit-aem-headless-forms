@@ -5,14 +5,27 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 const path = require('path');
 require('dotenv').config({ path: './.env' });
 
-const basicAuthHeader = () => {
+const getAEMBasicAuth = () => {
     if (process.env.AEM_USERNAME && process.env.AEM_PASSWORD) {
         const credentialsString = process.env.AEM_USERNAME + ":" + process.env.AEM_PASSWORD
-        return {'authorization': 'Basic ' + Buffer.from(credentialsString).toString('base64')}
+        return 'Basic ' + Buffer.from(credentialsString).toString('base64');
     } else {
-        return {};
+        return "";
     }
 }
+
+const aemProxyReq = (proxyReq) => {
+    console.log("inside proxy req");
+    if (process.env.AEM_URL && proxyReq.getHeader("origin")) {
+        console.log("setting new origin header");
+        proxyReq.setHeader("origin", process.env.AEM_URL);
+    }
+    const authValue = getAEMBasicAuth()
+    if (authValue) {
+        console.log("setting authorization header");
+        proxyReq.setHeader("authorization", authValue);
+    }
+};
 
 module.exports =
     merge(common, {
@@ -31,31 +44,22 @@ module.exports =
             compress: true,
             port: 3000,
             proxy: {
+                '/api': {
+                    target: process.env.FORM_API,
+                    pathRewrite: { '^/api': '' },
+                },
                 '/adobe': {
                     target: process.env.AEM_URL,
                     secure: false,
                     changeOrigin: true,
-                    bypass: function (req, res, proxyOptions) {
-                        req.headers = {
-                            ...req.headers,
-                            ...basicAuthHeader()
-                        };
-                    }
+                    onProxyReq: aemProxyReq
                 },
                 '/content': {
                     target: process.env.AEM_URL,
                     secure: false,
                     changeOrigin: true,
-                    bypass: function (req, res, proxyOptions) {
-                        req.headers = {
-                            ...req.headers,
-                            ...basicAuthHeader()
-                        };
-                    }
+                    onProxyReq: aemProxyReq
                 }
-            },
-            headers : {
-                ...basicAuthHeader()
             }
         },
         plugins: [
