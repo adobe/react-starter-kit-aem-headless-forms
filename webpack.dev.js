@@ -16,7 +16,7 @@ const getAEMBasicAuth = () => {
 
 const aemProxyReq = (proxyReq) => {
     console.log("inside proxy req");
-    if (process.env.AEM_URL && proxyReq.getHeader("origin")) {
+    if (process.env.AEM_URL) {
         console.log("setting new origin header");
         proxyReq.setHeader("origin", process.env.AEM_URL);
     }
