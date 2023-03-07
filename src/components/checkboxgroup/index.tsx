@@ -21,9 +21,10 @@ const useStyles = makeStyles((theme: any) => ({
 
 const CheckboxGroupComponent = (props: any) => {
     const {
-        label, id, required, enumNames, enum: enums,
+        label, id, required, enumNames, enum: enums, enabled,
         visible, value, onChange, description, valid, name, type
     } = props;
+    const isEnabled = enabled === false ? false : true;
     const errorMessage = props.errorMessage || DEFAULT_ERROR_MESSAGE;
     const validateState = valid === false ? 'invalid' : ((valid === undefined || isEmpty(value)) ? undefined : 'valid');
     const error = validateState === 'invalid';
@@ -57,7 +58,16 @@ const CheckboxGroupComponent = (props: any) => {
                     options.map((opt: any, index: string | number) => (
                         <FormControlLabel
                             key={enums[index]}
-                            control={<Checkbox color="primary" name={name} value={enums[index]} checked={valueArr.includes(enums[index])} onChange={changeHandler} />}
+                            control={(
+                              <Checkbox 
+                                color="primary" 
+                                name={name} 
+                                value={enums[index]} 
+                                checked={valueArr.includes(enums[index])} 
+                                onChange={changeHandler} 
+                                disabled={!isEnabled}
+                              />
+                            )}
                             label={opt}
                         />
                     ))

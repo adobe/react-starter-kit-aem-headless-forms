@@ -25,12 +25,12 @@ const useStyles = makeStyles((theme) => ({
 const TextFieldComponent = (props: any) => {
     const [showPassword, setShowPassword] = useState(false);
     const {
-        id, label, value, required, readOnly = false, properties, placeholder,
+        id, label, value, required, readOnly = false, properties, placeholder, enabled,
         description , visible, format, onChange, onBlur, maxLength, valid, appliedCssClassNames
     } = props;
+
+    const isEnabled = enabled === false ? false : true;
     const errorMessage = props.errorMessage || DEFAULT_ERROR_MESSAGE;
-
-
     const validateState = valid === false ? 'invalid' : ((valid === undefined  || isEmpty(value)) ? undefined : 'valid');
     const error = validateState === 'invalid';
     const { inputType } = properties || {};
@@ -116,6 +116,7 @@ const TextFieldComponent = (props: any) => {
                 placeholder={placeholder}
                 required={required}
                 readOnly={readOnly}
+                disabled={!isEnabled}
             />
             {error && <FormHelperText>{errorMessage}</FormHelperText>}
             {description && !error && <FormHelperText>{richTextString(description)}</FormHelperText>}
