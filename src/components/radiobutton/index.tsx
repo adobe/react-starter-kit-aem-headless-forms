@@ -20,9 +20,10 @@ const useStyles = makeStyles((theme) => ({
 // Customer's component
 const RadioGroupComponent = (props: any) => {
     const {
-        label, id, required, enumNames, enum: enums,
+        label, id, required, enumNames, enum: enums, enabled,
         visible, value, onChange, description, valid, name
     } = props;
+    const isEnabled = enabled === false ? false : true;
     const errorMessage = props.errorMessage || DEFAULT_ERROR_MESSAGE;
     const validateState = valid === false ? 'invalid' : ((valid === undefined || isEmpty(value)) ? undefined : 'valid');
     const error = validateState === 'invalid';
@@ -40,12 +41,13 @@ const RadioGroupComponent = (props: any) => {
             <FormLabel>{label?.value}</FormLabel>
             <RadioGroup
                 name={name}
+                key={value}
                 value={value}
                 onChange={changeHandler}
             >
                 {
                     options.map((opt: any, index: string | number) => (
-                        <FormControlLabel value={enums[index]} key={enums[index]} control={<Radio color="primary"/>} label={opt} />
+                        <FormControlLabel value={enums[index]} key={enums[index]} control={<Radio color="primary" disabled={!isEnabled}/>} label={opt} />
                     ))
                 }
             </RadioGroup>

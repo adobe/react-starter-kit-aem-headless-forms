@@ -23,9 +23,11 @@ const useStyles = makeStyles((theme: any) => ({
 
 const DropDownComponent = (props: any) => {
     const {
-        label, id, required, enumNames, enum: enums,
+        label, id, required, enumNames, enum: enums, enabled,
         visible, value, onChange, description, valid, onBlur
     } = props;
+
+    const isEnabled = enabled === false ? false : true;
     const errorMessage = props.errorMessage || DEFAULT_ERROR_MESSAGE;
     const validateState = valid === false ? 'invalid' : ((valid === undefined  || isEmpty(value)) ? undefined : 'valid');
     const error = validateState === 'invalid';
@@ -49,9 +51,11 @@ const DropDownComponent = (props: any) => {
                 labelId={`${id}-label`}
                 id={id}
                 value={value}
+                key={value}
                 onChange={changeHandler}
                 onBlur={handleBlur}
                 displayEmpty
+                disabled={!isEnabled}
                 className={classes.selectEmpty}
             >
                 {
