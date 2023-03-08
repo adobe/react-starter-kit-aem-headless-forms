@@ -42,7 +42,7 @@ module.exports =
             open: true,
             hot: true,
             compress: true,
-            port: 3000,
+            port: 3001,
             proxy: {
                 '/api': {
                     target: process.env.FORM_API,
