@@ -17,10 +17,10 @@ FORM_API=''
 AEM_URL=
 
 # AEM user name
-AEM_USERNAME=summituser
+AEM_USERNAME=
 
 # AEM password
-AEM_PASSWORD=summituser
+AEM_PASSWORD=
 
 # Adaptive form path
 AEM_FORM_PATH=
