@@ -16,7 +16,7 @@ import ReactDOM from "react-dom";
 import {Action} from "@aemforms/af-core";
 //@ts-ignore
 import {Provider as Spectrum3Provider, defaultTheme} from '@adobe/react-spectrum'
-import localFormJson from '../form-definations/form-model.json';
+import localFormJson from '../form-definitions/form-model.json';
 
 const getForm = async () => {
   if (process.env.USE_LOCAL_JSON == 'true') {
