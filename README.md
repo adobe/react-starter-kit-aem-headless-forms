@@ -35,7 +35,7 @@ Builds the app for production to the `build` folder. It bundles React in product
 
 ## Using external api to fetch form model json
 
-By default, this project is configured to pick the form model json from ../form-definations/form-model.json. For scenarios where the model needs to be served from an external API, we will need to update the below environment variables in [.env](./.env) file.
+By default, this project is configured to pick the form model json from ../form-definitions/form-model.json. For scenarios where the model needs to be served from an external API, we will need to update the below environment variables in [.env](./.env) file.
 * `USE_LOCAL_JSON` : Set this to 'false'
 * `FORM_API` : Set the value to the HTTP endpoint.
 
