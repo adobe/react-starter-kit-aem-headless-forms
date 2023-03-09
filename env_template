@@ -16,11 +16,5 @@ FORM_API=''
 # AEM url
 AEM_URL=
 
-# AEM user name
-AEM_USERNAME=
-
-# AEM password
-AEM_PASSWORD=
-
 # Adaptive form path
 AEM_FORM_PATH=
