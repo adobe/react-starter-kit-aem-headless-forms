@@ -7,8 +7,9 @@
 # the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
 # OF ANY KIND, either express or implied. See the License for the specific language
 # governing permissions and limitations under the License.
+
 # set true to use local json
-USE_LOCAL_JSON=false
+USE_LOCAL_JSON=true
 
 # use a backend form api directly
 FORM_API=''
