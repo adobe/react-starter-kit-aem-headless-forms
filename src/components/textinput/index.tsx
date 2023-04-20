@@ -25,9 +25,10 @@ const useStyles = makeStyles((theme) => ({
 const TextFieldComponent = (props: any) => {
     const [showPassword, setShowPassword] = useState(false);
     const {
-        id, label, value, required, readOnly = false, properties, placeholder, enabled,
+        id, label, value, required, readOnly = false, properties, placeholder, enabled, fieldType,
         description , visible, format, onChange, onBlur, maxLength, valid, appliedCssClassNames
     } = props;
+    const multiline = fieldType === 'multiline-input' ? true : false;
 
     const isEnabled = enabled === false ? false : true;
     const errorMessage = props.errorMessage || DEFAULT_ERROR_MESSAGE;
@@ -117,6 +118,7 @@ const TextFieldComponent = (props: any) => {
                 required={required}
                 readOnly={readOnly}
                 disabled={!isEnabled}
+                multiline={multiline}
             />
             {error && <FormHelperText>{errorMessage}</FormHelperText>}
             {description && !error && <FormHelperText>{richTextString(description)}</FormHelperText>}

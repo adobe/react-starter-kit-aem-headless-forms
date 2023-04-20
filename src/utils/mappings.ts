@@ -6,7 +6,6 @@ import RadioGroup from "../components/radiobutton";
 import TextInput from "../components/textinput";
 import NumberInput from "../components/numberinput";
 import Form from "../components/form";
-import TextArea from "../components/textArea";
 
 const customMappings: any = {
   "form": Form,
@@ -17,7 +16,7 @@ const customMappings: any = {
   "panel": Panel,
   "drop-down": DropDown,
   "checkbox-group": CheckBoxGroup,
-  "multiline-input": TextArea
+  "multiline-input": TextInput
 };
 
 export default customMappings;
