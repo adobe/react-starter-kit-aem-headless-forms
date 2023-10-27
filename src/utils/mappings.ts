@@ -9,13 +9,9 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import { mappings } from "@aemforms/af-react-components";
-import RichText from "../components/richtext";
-import Slider from "../components/slider";
+import { mappings } from "@aemforms/af-react-vanilla-components";
 
 const customMappings: any = {
-  "custom:slider": Slider,
-  "custom:rich-text": RichText,
   ...mappings
 };
 

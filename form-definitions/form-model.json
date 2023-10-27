@@ -8,11 +8,12 @@
           "value": "Welcome"
         },
         "fieldType" : "panel",
-        ":type": "custom:vertical-tab",
+        ":type": "core/fd/components/form/tabsontop/v1/tabsontop",
         "items": [
           {
             "name": "step1",
             "fieldType" : "panel",
+            ":type": "core/fd/components/form/panelcontainer/v1/panelcontainer",
             "label": {
               "value": "Identify Yourself",
               "visible": false
@@ -55,6 +56,7 @@
           {
             "name": "loanDetails",
             "fieldType": "panel",
+            ":type": "core/fd/components/form/panelcontainer/v1/panelcontainer",
             "type": "object",
             "label": {
               "value": "Loan Details"
@@ -79,7 +81,6 @@
                 }
               },
               {
-                ":type": "custom:slider",
                 "name": "duration",
                 "fieldType": "number-input",
                 "required": true,
@@ -92,7 +93,6 @@
                 }
               },
               {
-                ":type": "custom:slider",
                 "name": "rateOfInterest",
                 "default": 8,
                 "maximum": 12,
@@ -130,6 +130,7 @@
           {
             "name": "acountDetails",
             "fieldType": "panel",
+            ":type": "core/fd/components/form/panelcontainer/v1/panelcontainer",
             "type": "object",
             "label": {
               "value": "Account Details"
