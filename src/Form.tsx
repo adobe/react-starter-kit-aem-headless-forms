@@ -14,9 +14,9 @@ import {AdaptiveForm} from "@aemforms/af-react-renderer";
 import customMappings from './utils/mappings';
 import ReactDOM from "react-dom";
 import {Action} from "@aemforms/af-core";
-//@ts-ignore
-import {Provider as Spectrum3Provider, defaultTheme} from '@adobe/react-spectrum'
 import localFormJson from '../form-definitions/form-model.json';
+import '@aemforms/af-canvas-theme/dist/theme.css';
+
 
 const getForm = async () => {
   if (process.env.USE_LOCAL_JSON == 'true') {
@@ -68,9 +68,7 @@ const Form = (props: any) => {
     }, []);
     if (form != "") {
         const element = document.querySelector(".cmp-formcontainer__content")
-        const retVal = (<Spectrum3Provider theme={defaultTheme}>
-            <AdaptiveForm formJson={JSON.parse(form)} mappings={customMappings} onInitialize={onInitialize} onFieldChanged={onFieldChanged} onSubmit={onSubmit}/>
-        </Spectrum3Provider>)
+        const retVal = (<AdaptiveForm formJson={JSON.parse(form)} mappings={customMappings} onInitialize={onInitialize} onFieldChanged={onFieldChanged} onSubmit={onSubmit}/>)
         return ReactDOM.createPortal(retVal, element)
     }
     return null

@@ -9,14 +9,16 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import { mappings } from "@aemforms/af-react-components";
-import RichText from "../components/richtext";
-import Slider from "../components/slider";
+import { mappings } from "@aemforms/af-react-vanilla-components";
 
 const customMappings: any = {
-  "custom:slider": Slider,
-  "custom:rich-text": RichText,
-  ...mappings
+  ...mappings,
+  "forms-components-examples/components/form/wizard": mappings["core/fd/components/form/wizard/v1/wizard"],
+  "forms-components-examples/components/form/accordion": mappings["core/fd/components/form/accordion/v1/accordion"],
+  "forms-components-examples/components/form/tabsontop": mappings["core/fd/components/form/tabsontop/v1/tabsontop"],
+  "forms-components-examples/components/form/verticaltabs": mappings["core/fd/components/form/verticaltabs/v1/verticaltabs"],
+  "forms-components-examples/components/form/panelcontainer": mappings["core/fd/components/form/panelcontainer/v1/panelcontainer"]
+
 };
 
 export default customMappings;

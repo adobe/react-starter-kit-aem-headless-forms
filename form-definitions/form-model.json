@@ -7,12 +7,13 @@
         "label": {
           "value": "Welcome"
         },
-        "fieldType" : "panel",
-        ":type": "custom:vertical-tab",
+        "fieldType": "panel",
+        ":type": "forms-components-examples/components/form/tabsontop",
         "items": [
           {
             "name": "step1",
-            "fieldType" : "panel",
+            "fieldType": "panel",
+            ":type": "forms-components-examples/components/form/panelcontainer",
             "label": {
               "value": "Identify Yourself",
               "visible": false
@@ -20,7 +21,7 @@
             "items": [
               {
                 "fieldType": "plain-text",
-                "richText" : true,
+                "richText": true,
                 "value": "Welcome to <b>Personal Banking</b>"
               },
               {
@@ -55,6 +56,7 @@
           {
             "name": "loanDetails",
             "fieldType": "panel",
+            ":type": "forms-components-examples/components/form/panelcontainer",
             "type": "object",
             "label": {
               "value": "Loan Details"
@@ -67,8 +69,8 @@
                 "required": true,
                 "default": 600000,
                 "maximum": 1000000,
-                "minimum" : 10000,
-                "step" : 1000,
+                "minimum": 10000,
+                "step": 1000,
                 "constraintMessages": {
                   "minimum": "Loan amount cannot be less than minimum",
                   "maximum": "Loan amount cannot exceed the maximum limit"
@@ -79,24 +81,22 @@
                 }
               },
               {
-                ":type": "custom:slider",
                 "name": "duration",
                 "fieldType": "number-input",
                 "required": true,
                 "default": 12,
                 "maximum": 60,
-                "minimum" : 2,
+                "minimum": 2,
                 "description": "Longer duration = Lower EMI",
                 "label": {
                   "value": "Choose Loan Duration in Months"
                 }
               },
               {
-                ":type": "custom:slider",
                 "name": "rateOfInterest",
                 "default": 8,
                 "maximum": 12,
-                "minimum" : 6,
+                "minimum": 6,
                 "fieldType": "number-input",
                 "type": "number",
                 "label": {
@@ -130,6 +130,7 @@
           {
             "name": "acountDetails",
             "fieldType": "panel",
+            ":type": "forms-components-examples/components/form/panelcontainer",
             "type": "object",
             "label": {
               "value": "Account Details"
@@ -170,7 +171,7 @@
                 "label": {
                   "value": "Kindely re-enter Your Acount Number"
                 },
-                "validationExpression" : "$field == acountNumber",
+                "validationExpression": "$field == acountNumber",
                 "pattern": "[0-9]{10,10}",
                 "constraintMessages": {
                   "pattern": "Account number must be 10 digits long.",
