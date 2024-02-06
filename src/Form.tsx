@@ -16,6 +16,8 @@ import ReactDOM from "react-dom";
 import {Action} from "@aemforms/af-core";
 import localFormJson from '../form-definitions/form-model.json';
 import '@aemforms/af-canvas-theme/dist/theme.css';
+import {FunctionRuntime} from '@aemforms/af-core';
+import * as customfunctions from './utils/customfunctions';
 
 
 const getForm = async () => {
@@ -46,8 +48,8 @@ const Form = (props: any) => {
     }
     const onSubmit= (action: Action) => {
       console.log('Submitting ' + action);
-      const thankyouPage =  action?.payload?.redirectUrl;
-      const thankYouMessage = action?.payload?.thankYouMessage;
+      const thankyouPage =  action?.payload?.body?.redirectUrl;
+      const thankYouMessage = action?.payload?.body?.thankYouMessage;
       if(thankyouPage){
         window.location.replace(thankyouPage);
       }else if(thankYouMessage){
@@ -67,6 +69,8 @@ const Form = (props: any) => {
         fetchForm()
     }, []);
     if (form != "") {
+        // Register all custom functions with FunctionRuntime
+        FunctionRuntime.registerFunctions({ ...customfunctions });
         const element = document.querySelector(".cmp-formcontainer__content")
         const retVal = (<AdaptiveForm formJson={JSON.parse(form)} mappings={customMappings} onInitialize={onInitialize} onFieldChanged={onFieldChanged} onSubmit={onSubmit}/>)
         return ReactDOM.createPortal(retVal, element)
