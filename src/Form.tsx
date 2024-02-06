@@ -55,6 +55,10 @@ const Form = (props: any) => {
       }
     };
 
+    const onSubmitError= (action: Action) => {
+      alert("Encountered an internal error while submitting the form.");
+    };
+
     const onInitialize = (action:Action) => {
       console.log('Initializing Form');
     };
@@ -68,7 +72,7 @@ const Form = (props: any) => {
     }, []);
     if (form != "") {
         const element = document.querySelector(".cmp-formcontainer__content")
-        const retVal = (<AdaptiveForm formJson={JSON.parse(form)} mappings={customMappings} onInitialize={onInitialize} onFieldChanged={onFieldChanged} onSubmitSuccess={onSubmitSuccess}/>)
+        const retVal = (<AdaptiveForm formJson={JSON.parse(form)} mappings={customMappings} onInitialize={onInitialize} onFieldChanged={onFieldChanged} onSubmitSuccess={onSubmitSuccess} onSubmitError={onSubmitError} onSubmitFailure={onSubmitError}/>)
         return ReactDOM.createPortal(retVal, element)
     }
     return null
