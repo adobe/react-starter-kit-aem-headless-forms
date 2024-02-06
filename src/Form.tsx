@@ -44,10 +44,10 @@ const Form = (props: any) => {
             setForm(JSON.stringify(json))
         }
     }
-    const onSubmit= (action: Action) => {
+    const onSubmitSuccess= (action: Action) => {
       console.log('Submitting ' + action);
-      const thankyouPage =  action?.payload?.redirectUrl;
-      const thankYouMessage = action?.payload?.thankYouMessage;
+      const thankyouPage =  action?.payload?.body?.redirectUrl;
+      const thankYouMessage = action?.payload?.body?.thankYouMessage;
       if(thankyouPage){
         window.location.replace(thankyouPage);
       }else if(thankYouMessage){
@@ -68,7 +68,7 @@ const Form = (props: any) => {
     }, []);
     if (form != "") {
         const element = document.querySelector(".cmp-formcontainer__content")
-        const retVal = (<AdaptiveForm formJson={JSON.parse(form)} mappings={customMappings} onInitialize={onInitialize} onFieldChanged={onFieldChanged} onSubmit={onSubmit}/>)
+        const retVal = (<AdaptiveForm formJson={JSON.parse(form)} mappings={customMappings} onInitialize={onInitialize} onFieldChanged={onFieldChanged} onSubmitSuccess={onSubmitSuccess}/>)
         return ReactDOM.createPortal(retVal, element)
     }
     return null
