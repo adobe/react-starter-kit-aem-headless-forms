@@ -48,8 +48,8 @@ const Form = (props: any) => {
     }
     const onSubmit= (action: Action) => {
       console.log('Submitting ' + action);
-      const thankyouPage =  action?.payload?.body?.redirectUrl;
-      const thankYouMessage = action?.payload?.body?.thankYouMessage;
+      const thankyouPage =  action?.payload?.redirectUrl;
+      const thankYouMessage = action?.payload?.thankYouMessage;
       if(thankyouPage){
         window.location.replace(thankyouPage);
       }else if(thankYouMessage){
