@@ -13,6 +13,7 @@ import { mappings } from "@aemforms/af-react-vanilla-components";
 
 const customMappings: any = {
   ...mappings,
+  "aemreferencedemosharedprogram/components/adaptiveForm/telephoneinput": mappings["core/fd/components/form/telephoneinput/v1/telephoneinput"],
   "aemreferencedemosharedprogram/components/adaptiveForm/verticaltabs": mappings['core/fd/components/form/verticaltabs/v1/verticaltabs'],
   "aemreferencedemosharedprogram/components/adaptiveForm/accordion":mappings['core/fd/components/form/accordion/v1/accordion'],
 };
