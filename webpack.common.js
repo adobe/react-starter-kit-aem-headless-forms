@@ -4,9 +4,6 @@ const pkg = require('./package.json');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack')
 require('dotenv').config({ path: './.env' });
-const alias = Object.keys(pkg.dependencies)
-    .reduce((obj, key) => ({...obj, [key]: path.resolve(__dirname, 'node_modules', key)}), {});
-
 module.exports = {
     entry: './src/index.tsx',
     devtool: 'source-map',
@@ -20,7 +17,7 @@ module.exports = {
             {
                 test: /\.css$/i,
                 use: [MiniCssExtractPlugin.loader, 'css-loader'],
-            },
+            }
         ],
     },
     plugins: [
@@ -46,15 +43,20 @@ module.exports = {
         }),
     ],
     resolve: {
-        alias: {
-            ...alias
-        },
+        // Instead of manually specifying aliases for each dependency, you can rely on Webpack's built-in module resolution.
+        //alias: {
+        //    ...alias
+        //},
+        modules: [
+            path.resolve(__dirname, 'node_modules'),
+            'node_modules',
+        ],
         extensions: ['.tsx', '.ts', '.js']
     },
     output: {
         filename: '[name].js',
         path: path.resolve(__dirname, 'dist'),
-        clean: true,
+        clean: true
         //sourceMapFilename: `clientlib-forms-react/resources/[name].map[ext]` // uncomment for debugging
     }
 };

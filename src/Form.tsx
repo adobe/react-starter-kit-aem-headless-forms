@@ -17,7 +17,8 @@ import {Action} from "@aemforms/af-core";
 import localFormJson from '../form-definitions/form-model.json';
 import '@aemforms/af-canvas-theme/dist/theme.css';
 import {FunctionRuntime} from '@aemforms/af-core';
-import * as customfunctions from './utils/customfunctions';
+//@ts-ignore
+import * as customfunctions from '@aemforms/af-custom-functions';
 
 
 const getForm = async () => {

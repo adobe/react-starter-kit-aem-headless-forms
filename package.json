@@ -1,12 +1,12 @@
 {
   "name": "myapp",
   "version": "1.0.0",
-  "description": "Sample for generating AF 2 Web Runtime clientlib",
+  "description": "React starter kit sample for headless forms",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\"",
     "build:dev": "webpack --config webpack.dev.js",
-    "build:prod": "webpack --config webpack.prod.js && clientlib --verbose",
+    "build:prod": "webpack --config webpack.prod.js",
     "start": "webpack serve --config webpack.dev.js --env mode=development"
   },
   "author": "",
@@ -27,7 +27,7 @@
     "typescript": "^4.6.4",
     "webpack": "^5.72.1",
     "webpack-bundle-analyzer": "^4.5.0",
-    "webpack-cli": "^4.9.2",
+    "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.9.0",
     "webpack-import-glob-loader": "^1.6.3",
     "webpack-merge": "^5.8.0"
@@ -37,6 +37,7 @@
     "@aemforms/af-core": "^0.22.37",
     "@aemforms/af-react-renderer": "^0.22.37",
     "@aemforms/af-react-vanilla-components": "^1.0.5",
+    "@aemforms/af-custom-functions": "^1.0.5",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-intl": "^5.8.4",
