@@ -25,7 +25,7 @@ const getData = async (formId: string) => {
   const dataAPI = process.env.DATA_API;
   if (dataAPI) {
     try {
-      const endpoint = `${dataAPI}/${process.env.AEM_FORM_PATH}${search}`
+      const endpoint = `${dataAPI}/${formId}${search}`
       const response = await fetch(endpoint);
       const json = await response.json();
       const { data } = json;
