@@ -14,32 +14,38 @@ import {AdaptiveForm} from "@aemforms/af-react-renderer";
 import customMappings from './utils/mappings';
 import ReactDOM from "react-dom";
 import {Action} from "@aemforms/af-core";
-import localFormJson from '../form-definitions/form-model.json';
+import localFormJson from './form-definitions/form-model.json';
 import '@aemforms/af-wknd-theme/dist/theme.css';
 import {FunctionRuntime} from '@aemforms/af-core';
 import * as customfunctions from './utils/customfunctions';
 
 
 const getForm = async () => {
-  if (process.env.USE_LOCAL_JSON == 'true') {
+ if (process.env.REACT_APP_USE_LOCAL_JSON == 'true') {
     return localFormJson;
   } else {
-    let formAPI = process.env.FORM_API;
+    let formAPI = process.env.REACT_APP_FORM_API;
     // check for null or empty string
     if (!formAPI) {
         const SUFFIX = "jcr:content/guideContainer.model.json";
-        const formPath = process.env.AEM_FORM_PATH
+        const formPath = process.env.AEM_FORM_PATH;
         formAPI = `${formPath}/${SUFFIX}`;
     }
-    const resp = await fetch(formAPI);
-    return (await resp.json());
-  }
+    const aemURL = process.env.REACT_APP_AEM_URL;
+    const formPath = process.env.REACT_APP_AEM_FORM_PATH;
+    const formURL =`${aemURL}${formPath}/jcr:content/guideContainer.model.json`;
+    
+  const resp = await fetch(formURL);
+  return (await resp.json());
+  } 
 }
 
 const Form = (props: any) => {
     const [form, setForm] = useState("")
     const fetchForm = async () => {
         const json:any = await getForm();
+        let actionTarget = json.action;
+        json.action = process.env.REACT_APP_AEM_URL+actionTarget;
         if ('afModelDefinition' in json) {
             setForm(JSON.stringify(json.afModelDefinition))
         } else {
@@ -48,13 +54,13 @@ const Form = (props: any) => {
     }
     const onSubmitSuccess= (action: Action) => {
       console.log('Submitting ' + action);
-      const thankyouPage =  action?.payload?.body?.redirectUrl;
+     /* const thankyouPage =  action?.payload?.body?.redirectUrl;
       const thankYouMessage = action?.payload?.body?.thankYouMessage;
       if(thankyouPage){
         window.location.replace(thankyouPage);
       }else if(thankYouMessage){
         alert(thankYouMessage);
-      }
+      }*/
     };
 
     const onSubmitError= (action: Action) => {
@@ -69,6 +75,10 @@ const Form = (props: any) => {
       console.log('On Field Changed (Executes everytime a form field is updated)')
     };
 
+    const onSubmit = (action:Action) => {
+      console.log('Submit Form'); 
+    };
+
     useEffect(() => {
         fetchForm()
     }, []);
@@ -76,7 +86,7 @@ const Form = (props: any) => {
       // Register all custom functions with FunctionRuntime
       FunctionRuntime.registerFunctions({ ...customfunctions });
       const element = document.querySelector(".cmp-formcontainer__content")
-      const retVal = (<AdaptiveForm formJson={JSON.parse(form)} mappings={customMappings} onInitialize={onInitialize} onFieldChanged={onFieldChanged} onSubmitSuccess={onSubmitSuccess} onSubmitError={onSubmitError} onSubmitFailure={onSubmitError}/>)
+      const retVal = (<AdaptiveForm formJson={JSON.parse(form)} mappings={customMappings} onInitialize={onInitialize} onFieldChanged={onFieldChanged} onSubmit={onSubmit} onSubmitSuccess={onSubmitSuccess} onSubmitError={onSubmitError} onSubmitFailure={onSubmitError}/>)
       return ReactDOM.createPortal(retVal, element)
   }
     return null

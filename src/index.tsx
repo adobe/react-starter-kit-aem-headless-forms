@@ -12,9 +12,12 @@ governing permissions and limitations under the License.
 import React from 'react';
 import ReactDOM from 'react-dom';
 // @ts-ignore
-import AForm from './Form'
+import AForm from './Form';
+
+
 
 window.onload = async () => {
+    
     let div = document.getElementById("form-app");
     if (!div) {
         div = document.createElement("div")
