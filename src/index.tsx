@@ -10,7 +10,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from "react-dom/client";;
 // @ts-ignore
 import AForm from './Form'
 
@@ -21,8 +21,6 @@ window.onload = async () => {
         div.id = "form-app"
         document.body.appendChild(div)
     }
-    ReactDOM.render(
-        <AForm/>,
-        div
-    );
+    const root = createRoot(div);
+    root.render(<AForm/>);
 };
