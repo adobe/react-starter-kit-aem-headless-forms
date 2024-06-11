@@ -11,8 +11,10 @@ governing permissions and limitations under the License.
 */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import '@aemforms/af-wknd-theme/dist/theme.css';
+import { createRoot } from 'react-dom/client';
 // @ts-ignore
-import AForm from './Form';
+import App from './App';
 
 
 
@@ -24,8 +26,7 @@ window.onload = async () => {
         div.id = "form-app"
         document.body.appendChild(div)
     }
-    ReactDOM.render(
-        <AForm/>,
-        div
-    );
+    const root = createRoot(div);
+    root.render(<App />);
+  //  ReactDOM.render(<App/>,div);
 };

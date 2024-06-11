@@ -1,0 +1,13 @@
+/* src/components/PageHeader/PageHeader.css */
+
+
+/* Styles for screens larger than 768px */
+
+
+/* Styles for screens larger than 1024px */
+@media (min-width: 1024px) {
+    .cmp-adaptiveform-pageheader {
+       margin-left: 16.67%;
+       width:64.5%;
+    }
+}
