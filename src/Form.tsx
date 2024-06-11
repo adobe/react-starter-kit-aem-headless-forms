@@ -15,7 +15,6 @@ import customMappings from './utils/mappings';
 import ReactDOM from "react-dom";
 import {Action} from "@aemforms/af-core";
 import localFormJson from './form-definitions/form-model.json';
-import '@aemforms/af-wknd-theme/dist/theme.css';
 import {FunctionRuntime} from '@aemforms/af-core';
 import * as customfunctions from './utils/customfunctions';
 
@@ -85,7 +84,7 @@ const Form = (props: any) => {
     if (form != "") {
       // Register all custom functions with FunctionRuntime
       FunctionRuntime.registerFunctions({ ...customfunctions });
-      const element = document.querySelector(".cmp-formcontainer__content")
+      const element = document.getElementById("form-app");
       const retVal = (<AdaptiveForm formJson={JSON.parse(form)} mappings={customMappings} onInitialize={onInitialize} onFieldChanged={onFieldChanged} onSubmit={onSubmit} onSubmitSuccess={onSubmitSuccess} onSubmitError={onSubmitError} onSubmitFailure={onSubmitError}/>)
       return ReactDOM.createPortal(retVal, element)
   }
