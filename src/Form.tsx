@@ -20,6 +20,22 @@ import {FunctionRuntime} from '@aemforms/af-core';
 //@ts-ignore
 import * as customfunctions from '@aemforms/af-custom-functions';
 
+const getData = async (formId: string) => {
+   const { search = '' } = window.location;
+  const dataAPI = process.env.DATA_API;
+  if (dataAPI) {
+    try {
+      const endpoint = `${dataAPI}/${formId}${search}`
+      const response = await fetch(endpoint);
+      const json = await response.json();
+      const { data } = json;
+      const { data: { afData: { afBoundData = {} } = {} } = {} } = json;
+      return Object.keys(afBoundData).length > 0 ? afBoundData : (data || json);
+    } catch (e) {
+      return null;
+    }
+  }
+}
 
 const getForm = async () => {
   if (process.env.USE_LOCAL_JSON == 'true') {
@@ -33,7 +49,12 @@ const getForm = async () => {
         formAPI = `${formPath}/${SUFFIX}`;
     }
     const resp = await fetch(formAPI);
-    return (await resp.json());
+    const formDef = await resp.json();
+    const data = await getData(formDef.id);
+    if (data != null) {
+      formDef.data = data;
+    }
+    return formDef;
   }
 }
 
