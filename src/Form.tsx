@@ -33,7 +33,35 @@ const getForm = async () => {
         formAPI = `${formPath}/${SUFFIX}`;
     }
     const resp = await fetch(formAPI);
-    return (await resp.json());
+    const formModel = await resp.json();
+    const id = formModel.id;
+    if (id) {
+      // Retrieve prefill parameters from the current browser context
+      const urlParams = new URLSearchParams(window.location.search);
+      const prefillAPI = `/adobe/forms/af/data/${id}?${urlParams.toString()}`;
+
+      try {
+          const prefillResp = await fetch(prefillAPI, {
+              method: 'GET',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              credentials: 'include'
+          });
+
+          if (prefillResp.ok) {
+              const prefillData = await prefillResp.json();
+              if (prefillData) {
+                  formModel.data = prefillData?.data;
+              }
+          } else {
+              console.info(`Failed to fetch prefill data: ${prefillResp.statusText}`);
+          }
+      } catch (error) {
+          console.info(`Error fetching prefill data: ${error.message}`);
+      }
+    }
+    return formModel;
   }
 }
 
