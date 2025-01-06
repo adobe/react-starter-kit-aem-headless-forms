@@ -15,7 +15,7 @@ import customMappings from './utils/mappings';
 import ReactDOM from "react-dom";
 import {Action} from "@aemforms/af-core";
 import localFormJson from '../form-definitions/form-model.json';
-import '@aemforms/af-canvas-theme/dist/theme.css';
+import '@aemforms/af-wknd-theme/dist/theme.css'
 import {FunctionRuntime} from '@aemforms/af-core';
 //@ts-ignore
 import * as customfunctions from '@aemforms/af-custom-functions';
