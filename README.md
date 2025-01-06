@@ -65,7 +65,14 @@ If you are not using Provider at your app level, you can use that with the Adapt
 import {mappings} from '@aemforms/af-react-vanilla-components'
 const json = {...}
 <AdaptiveForm mappings={mappings} formJson={json} />
+
 ```
+The React Starter Kit uses the Canvas theme by default; to use other themes like WKND or Easel, please follow the provided steps to configure WKND theme: 
+1) Install the theme using npm install --save @aemforms/af-wknd-theme.
+2) After installing it, import it in form.tsx using import '@aemforms/af-wknd-theme/dist/theme.css'.
+
+For reference, check the steps to configure WKND theme(`https://github.com/adobe/react-starter-kit-aem-headless-forms/pull/22`)
+
 # Links
 1. [Story book](https://opensource.adobe.com/aem-forms-af-runtime/storybook)
 2. [HTTP API Docs](https://opensource.adobe.com/aem-forms-af-runtime/api)
