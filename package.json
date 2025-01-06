@@ -38,6 +38,7 @@
     "@aemforms/af-custom-functions": "^1.0.8",
     "@aemforms/af-react-renderer": "^0.22.87",
     "@aemforms/af-react-vanilla-components": "^1.0.18",
+    "@aemforms/af-wknd-theme": "^1.0.11",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-intl": "^5.8.4",
